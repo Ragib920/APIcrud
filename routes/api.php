@@ -21,3 +21,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('company_list', [APIcrudController::class, 'CompanyListView']);
 Route::get('active_company_list', [APIcrudController::class, 'ActiveCompanyListView']);
+
+Route::post('insert_company', [APIcrudController::class, 'InsertCompany']);
+
