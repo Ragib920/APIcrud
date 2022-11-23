@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\CompanyModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class APIcrudController extends Controller
 {
@@ -21,6 +23,22 @@ class APIcrudController extends Controller
 
         if($request->ismethod('post')){
             $data= $request->all();
+
+            // validation starts
+            $rules = [
+                'name' => 'required',
+            ];
+            $message = [
+                'name.required'=>'Insert Company Name',
+            ];
+
+            $validator = Validator::make($data, $rules, $message);
+
+            if($validator->fails())
+            {
+                return response()->json($validator->errors(),422);
+            }
+            // validation ends
 
             $company = new CompanyModel();
             $company->name = $data['name'];
