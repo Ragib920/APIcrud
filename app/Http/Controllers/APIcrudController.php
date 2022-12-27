@@ -23,7 +23,6 @@ class APIcrudController extends Controller
 
         if($request->ismethod('post')){
             $data= $request->all();
-
             // validation starts
             $rules = [
                 'name' => 'required',
@@ -39,7 +38,6 @@ class APIcrudController extends Controller
                 return response()->json($validator->errors(),422);
             }
             // validation ends
-
             $company = new CompanyModel();
             $company->name = $data['name'];
             $company->company_logo = $data['company_logo'];
@@ -49,6 +47,7 @@ class APIcrudController extends Controller
             $message = 'Successfully Added';
             return response()->json(['message' => $message],201);
         }
+
     }
 
 }
